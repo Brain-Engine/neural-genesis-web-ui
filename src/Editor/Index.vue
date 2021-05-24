@@ -45,8 +45,6 @@
   import * as G6Util from '@antv/util'
   // 自定义栅格插件
   // import XGrid from '@/global/g6/plugins/XGrid'
-  // 背景图
-  import XBackground from '@/global/g6/plugins/XBackground'
   // 全屏
   import screenfull from 'screenfull'
   // 热键
@@ -146,10 +144,7 @@
           })
           plugins.push(minimap)
         }
-        const grid = new G6.Grid()
-        const background = new XBackground()
-        plugins.push(grid)
-        plugins.push(background)
+        plugins.push(new G6.Grid())
         // 生成编辑器实例
         _t.editor = new G6.Graph({
           plugins,
@@ -218,6 +213,7 @@
             }
           }
         })
+        document.getElementsByClassName('g6-grid-container')[0].style.inset = ''
         // 挂载G6配置
         _t.editor.$C = G6.$C
         // 挂载编辑器$D命名空间，用于Vue组件与Graph之间传值
@@ -304,7 +300,7 @@
       _nodeHover (event) {
         const _t = this
         // FIXME 当节点未激活时才可设置hover true状态
-        if (!G6.$D.status && !event.item.hasState('active')) {
+        if (G6.$D && !G6.$D.status && !event.item.hasState('active')) {
           _t.editor.setItemState(event.item, 'hover', true)
         }
       },
@@ -804,8 +800,6 @@
                       _t.currentItem = []
                       // 设置数据
                       _t.editor.data(fileJson)
-                      // 渲染
-                      _t.editor.render()
                       _t.editor.getNodes().forEach(node => {
                         const model = node.getModel()
                         const radian = model.radian
@@ -818,10 +812,6 @@
                         // 更新锚点
                         utils.anchor.rotate(model, group, radian)
                       })
-                      // 缩放到实际大小
-                      _t.doZoom({
-                        name: 'actualSize'
-                      })
                       // 加载数据后保存记录
                       // 更新操作日志
                       _t.doUpdateLog({
@@ -830,6 +820,13 @@
                           time: new Date(),
                           content: _t.editor.save()
                         }
+                      })
+                      // 渲染
+                      _t.editor.render()
+                      _t.editor.refresh()
+                      // 缩放到实际大小
+                      _t.doZoom({
+                        name: 'actualSize'
                       })
                     } catch (e) {
                       // 提示

@@ -1068,7 +1068,7 @@ export default {
         }
         const canvas = _t.graph.get('canvas')
         const el = canvas.get('el')
-        _t.toolTip.currentTip = G6DomUtil.createDom(`<div class="tooltip">${content}</div>`)
+        _t.toolTip.currentTip = G6DomUtil.createDom(`<div class='tooltip'>${content}</div>`)
         if (_t.toolTip.currentTip) {
           // 插入输入框dom
           el.parentNode.appendChild(_t.toolTip.currentTip)
@@ -1121,7 +1121,7 @@ export default {
       // 对齐线列表
       lineList: [],
       // 最大距离
-      maxDistance: 2,
+      maxDistance: 1,
       start () {
         const _t = this
         _t.alignLine._clear.call(_t)
@@ -1186,8 +1186,8 @@ export default {
         // 遍历节点
         const nodes = _t.graph.getNodes()
         nodes.forEach(node => {
-          let horizontalLines = []
-          let verticalLines = []
+          const horizontalLines = []
+          const verticalLines = []
           // 对齐线信息
           const info = {
             horizontals: [],
@@ -1225,7 +1225,7 @@ export default {
           horizontalLines.sort((a, b) => a.dis - b.dis)
           verticalLines.sort((a, b) => a.dis - b.dis)
           // 过滤掉距离为0的线条
-          horizontalLines = horizontalLines.filter(lineItem => lineItem.dis !== 0)
+          // horizontalLines = horizontalLines.filter(lineItem => lineItem.dis !== 0)
           if (horizontalLines.length && horizontalLines[0].dis < _t.alignLine.maxDistance) {
             // 取前3个距离相等的线条
             for (let i = 0; i < 3; i++) {
@@ -1235,7 +1235,7 @@ export default {
             }
           }
           // 过滤掉距离为0的线条
-          verticalLines = verticalLines.filter(lineItem => lineItem.dis !== 0)
+          // verticalLines = verticalLines.filter(lineItem => lineItem.dis !== 0)
           if (verticalLines.length && verticalLines[0].dis < _t.alignLine.maxDistance) {
             // 取前3个距离相等的线条
             for (let i = 0; i < 3; i++) {

@@ -78,7 +78,7 @@
 
 <template>
   <div class="options">
-    <Form v-if="isNode || isEdge" :rules="ruleValidate" label-position="top">
+    <Form v-if="isNode || isEdge" label-position="top">
       <!-- 神经网络参数集 -->
       <CardItem v-if="isNeuralNetworkModel" :title="$t('L10106')">
         <div class="form-item-block">
@@ -491,7 +491,6 @@
         return list
       },
       isNeuralNetworkModel () {
-        console.log(this.firstItem, this.isNode, this.firstItem.model)
         return this.firstItem && this.isNode && this.firstItem.model.isNeuralNetworkModel
       },
       isNode () {
@@ -510,12 +509,10 @@
           const _t = this
           // 取第一个节点
           _t.firstItem = val[0]
-          console.log(_t.firstItem)
           if (_t.firstItem) {
             // 解构属性
             const model = JSON.parse(JSON.stringify(_t.firstItem.model))
             const { labelCfg } = model
-            console.log(model)
             const formData = {}
             if (_t.isNode) {
               const { x, y, width, height, style, label } = model
@@ -545,7 +542,6 @@
                 position: labelCfg.position,
                 offset: labelCfg.offset
               }
-              console.log(model.isNeuralNetworkModel)
               if (model.isNeuralNetworkModel) {
                 formData.isNeuralNetworkModel = true
                 formData.neuralNetworkData = model.neuralNetworkData

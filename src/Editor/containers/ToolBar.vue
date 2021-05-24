@@ -45,10 +45,12 @@
           display: inline-block;
           line-height: 1;
           vertical-align: middle;
+          width: 100%;
+          height: 100%;
 
           .icon {
-            width: 40px;
-            height: auto;
+            width: 100%;
+            height: 100%;
           }
         }
       }

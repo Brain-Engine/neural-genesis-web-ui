@@ -42,7 +42,7 @@
         title: 'xfcDemo',
         logo: require('@/assets/images/logo.png'),
         github: 'https://github.com/OXOYO/X-Flowchart-Vue',
-        githubPages: 'http://oxoyo.co/X-Flowchart-Vue/',
+        githubPages: '/',
         feedback: 'https://github.com/OXOYO/X-Flowchart-Vue/issues/new',
         copyright: '©2019 - 2020 OXOYO All Rights Reserved.'
       }
